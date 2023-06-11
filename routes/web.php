@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\EatableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +28,7 @@ Route::get('/admin/login', [AuthController::class, 'showAdminLoginPage']);
 Route::get('/admin/app', [AdminController::class, 'showAdminDashboard']);
 
 Route::get('/admin/category', [CategoryController::class, 'showAddCategoryPage']);
+
+Route::get('/admin/eatable', [EatableController::class, 'showManageEatablePage']);
 
 Route::post('/filterLoginMethod', [AuthController::class, 'filterValidateLoginMethod']);

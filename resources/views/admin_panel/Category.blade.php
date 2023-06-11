@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-1.2.2.css">
     <link rel="stylesheet" type="text/css" href="css/jqvmap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('tables/css/dataTables.bootstrap4.css')}}">
     <link rel="stylesheet" href="css/app.css" type="text/css">
 </head>
 
@@ -160,28 +161,22 @@
         </div>
     </div>
 
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/perfect-scrollbar.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    <script src="js/app.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.pie.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.time.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.resize.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.orderBars.js" type="text/javascript"></script>
-    <script src="js/curvedLines.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.tooltip.js" type="text/javascript"></script>
-    <script src="js/jquery.sparkline.min.js" type="text/javascript"></script>
-    <script src="js/countUp.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="js/jquery.vmap.min.js" type="text/javascript"></script>
-    <script src="js/jquery.vmap.world.js" type="text/javascript"></script>
+    <script src="{{asset('tables/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/app.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/perfect-scrollbar.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/jszip.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/jquery.dataTables.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/dataTables.bootstrap4.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/dataTables.buttons.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/dataTables.responsive.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/responsive.bootstrap4.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('tables/js/buttons.bootstrap4.min.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             //-initialize the javascript
             App.init();
-            App.dashboard();
-
+            App.dataTables();
         });
     </script>
 </body>
