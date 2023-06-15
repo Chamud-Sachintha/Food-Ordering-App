@@ -10,11 +10,11 @@
     <link rel="shortcut icon" href="images/logo-fav.png">
     <title>Beagle</title>
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/perfect-scrollbar.css')}}">
-    <link rel="stylesheet" type="text/css" href="css/material-design-iconic-font.min.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-1.2.2.css">
-    <link rel="stylesheet" type="text/css" href="css/jqvmap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.min.css">
-    <link rel="stylesheet" href="css/app.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/material-design-iconic-font.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/jquery-jvectormap-1.2.2.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/jqvmap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-datetimepicker.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin/css/app.css')}}" type="text/css">
 </head>
 
 <body>
@@ -31,7 +31,7 @@
     <script src="js/jquery.min.js" type="text/javascript"></script>
     <script src="js/perfect-scrollbar.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
-    <script src="js/app.js" type="text/javascript"></script>
+    <script src="{{asset('admin/js/app.js')}}" type="text/javascript"></script>
     <script src="js/jquery.flot.js" type="text/javascript"></script>
     <script src="js/jquery.flot.pie.js" type="text/javascript"></script>
     <script src="js/jquery.flot.time.js" type="text/javascript"></script>

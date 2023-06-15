@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EatableController;
 
 /*
@@ -23,9 +24,13 @@ Route::get('/', function () {
 
 Route::get('/login', [AuthController::class, 'showClientLoginPage']);
 
+Route::get('/register', [AuthController::class, 'showClientRegisterPage']);
+
 Route::get('/admin/login', [AuthController::class, 'showAdminLoginPage']);
 
 Route::get('/admin/app', [AdminController::class, 'showAdminDashboard']);
+
+Route::get('/client/app', [ClientController::class, 'showClientDashboard']);
 
 Route::get('/admin/category', [CategoryController::class, 'showAddCategoryPage']);
 
@@ -36,3 +41,5 @@ Route::post('/filterLoginMethod', [AuthController::class, 'filterValidateLoginMe
 Route::post('/addNewCategory', [CategoryController::class, 'addNewCatgeory']);
 
 Route::post('/addNewEatable', [EatableController::class, 'addNewEatable']);
+
+Route::post('/registerNewCustomer', [AuthController::class, 'registerNewCustomerDetails']);
