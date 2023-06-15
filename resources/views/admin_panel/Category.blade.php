@@ -29,7 +29,8 @@
                       <div class="card card-border-color card-border-color-primary">
                         <div class="card-header card-header-divider">Add New Category<span class="card-subtitle">This is the default bootstrap form layout</span></div>
                         <div class="card-body">
-                          <form>
+                          <form action="/addNewCategory" method="POST" enctype="multipart/form-data" onsubmit="addNewCategory()" id="categoryForm">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6 col-sm-12 col-lg-6">
                                     <label for="categoryName">Category Name</label>
@@ -39,26 +40,34 @@
                                     <label>Custom Button File Input</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text" id="inputGroupFileAddon01">
+                                            <span class="input-group-text">
                                                 Upload
                                             </span>
                                         </div>
                                         <div class="custom-file">
-                                            <input class="custom-file-input" id="inputGroupFile01" type="file" aria-describedby="inputGroupFileAddon01">
-                                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                            <input class="custom-file-input" name="categoryImage" type="file" aria-describedby="inputGroupFileAddon01">
+                                            <label class="custom-file-label" for="categoryImage">Choose file</label>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6 col-sm-12 col-lg-6">
-                                    <label for="categoryDescription">Category Description</label>
-                                    <textarea class="form-control" name="categoryDescription"></textarea>
-                                </div>
+                              <div class="col-md-6 col-sm-12 col-lg-6">
+                                <label>Basic Select</label>
+                                <select class="form-control" name="status">
+                                  <option value="1">Active</option>
+                                  <option value="0">Inactive</option>
+                                </select>
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-lg-6">
+                                  <label for="description">Category Description</label>
+                                  <textarea class="form-control" name="description"></textarea>
+                              </div>
                             </div>
                             <div class="row pt-3">
                               <div class="col-sm-6">
-                                <button class="btn btn-space btn-primary" type="submit">Submit</button>
+                                <input type="submit" value="Submit" class="btn btn-space btn-primary">
+                                {{-- <button class="btn btn-space btn-primary" type="submit">Submit</button> --}}
                                 <button class="btn btn-space btn-secondary">Cancel</button>
                               </div>
                             </div>
@@ -75,82 +84,67 @@
                               <table class="table table-striped table-hover table-fw-widget" id="table4">
                                 <thead>
                                   <tr>
-                                    <th>Rendering engine</th>
-                                    <th>Browser</th>
-                                    <th>Platform(s)</th>
-                                    <th>Engine version</th>
-                                    <th>CSS grade</th>
+                                    <th>Category Name</th>
+                                    <th>Category Image</th>
+                                    <th>Description(s)</th>
+                                    <th>Category Status</th>
+                                    <th>Actions</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  <tr class="odd gradeX">
-                                    <td>Trident</td>
-                                    <td>
-                                      Internet
-                                      Explorer 4.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td class="center"> 4</td>
-                                    <td class="center"></td>
-                                  </tr>
-                                  <tr class="even gradeC">
-                                    <td>Trident</td>
-                                    <td>
-                                      Internet
-                                      Explorer 5.0
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td class="center">5</td>
-                                    <td class="center">C</td>
-                                  </tr>
-                                  <tr class="odd gradeA">
-                                    <td>Trident</td>
-                                    <td>
-                                      Internet
-                                      Explorer 5.5
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td class="center">5.5</td>
-                                    <td class="center">A</td>
-                                  </tr>
-                                  <tr class="even gradeA">
-                                    <td>Trident</td>
-                                    <td>
-                                      Internet
-                                      Explorer 6
-                                    </td>
-                                    <td>Win 98+</td>
-                                    <td class="center">6</td>
-                                    <td class="center">A</td>
-                                  </tr>
-                                  <tr class="odd gradeA">
-                                    <td>Trident</td>
-                                    <td>Internet Explorer 7</td>
-                                    <td>Win XP SP2+</td>
-                                    <td class="center">7</td>
-                                    <td class="center">A</td>
-                                  </tr>
-                                  <tr class="even gradeA">
-                                    <td>Trident</td>
-                                    <td>AOL browser (AOL desktop)</td>
-                                    <td>Win XP</td>
-                                    <td class="center">6</td>
-                                    <td class="center">A</td>
-                                  </tr>
-                                  <tr class="gradeA">
-                                    <td>Gecko</td>
-                                    <td>Firefox 1.0</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td class="center">1.7</td>
-                                    <td class="center">A</td>
-                                  </tr>
-                                  <tr class="gradeA">
-                                    <td>Gecko</td>
-                                    <td>Firefox 1.5</td>
-                                    <td>Win 98+ / OSX.2+</td>
-                                    <td class="center">1.8</td>
-                                    <td class="center">A</td>
-                                  </tr>
+                                  @foreach ($categories as $item)
+                                    @if ($loop->index %2 == 0)
+                                      <tr class="even">
+                                        <td>{{ $item->categoryName }}</td>
+                                        <td>
+                                          <img src="{{ asset('images/'.$item->categoryImage) }}" alt="" style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
+                                        </td>
+                                        <td>{{ $item->description }}</td>
+                                        <td class="center">
+                                          @if ($item->status == 1)
+                                            Active
+                                          @else
+                                            Inactive
+                                          @endif
+                                        </td>
+                                        <td class="center">
+                                          <div class="row">
+                                            <div class="col-md-3 col-sm-12 col-lg-3">
+                                              <button class="btn btn-rounded btn-space btn-success">Success</button>
+                                            </div>
+                                            <div class="col-md-9 col-sm-12 col-lg-9">
+                                              <button class="btn btn-rounded btn-space btn-danger">Delete</button>
+                                            </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    @else
+                                      <tr class="odd">
+                                        <td>{{ $item->categoryName }}</td>
+                                        <td>
+                                          <img src="{{ asset('images/'.$item->categoryImage) }}" alt="" style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
+                                        </td>
+                                        <td>{{ $item->description }}</td>
+                                        <td class="center">
+                                          @if ($item->status == 1)
+                                            Active
+                                          @else
+                                            Inactive
+                                          @endif
+                                        </td>
+                                        <td class="center">
+                                          <div class="row">
+                                            <div class="col-md-3 col-sm-12 col-lg-3">
+                                              <button class="btn btn-rounded btn-space btn-success">Success</button>
+                                            </div>
+                                            <div class="col-md-9 col-sm-12 col-lg-9">
+                                              <button class="btn btn-rounded btn-space btn-danger">Delete</button>
+                                            </div>
+                                          </div>
+                                        </td>
+                                      </tr>
+                                    @endif
+                                  @endforeach
                                 </tbody>
                               </table>
                             </div>
@@ -178,6 +172,10 @@
             App.init();
             App.dataTables();
         });
+
+        function addNewCategory(e) {
+          e.preventDefault();
+        }
     </script>
 </body>
 
