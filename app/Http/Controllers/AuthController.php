@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -45,9 +48,17 @@ class AuthController extends Controller
 
     }
 
-    public function validateAdminLogin(Request $request) {
+    public function validateAdminLogin(Request $loginDetails) {
 
-        if ($request->userEmail != null && !empty($request->userEmail)) {
+        $this->validate($loginDetails, [
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        $user = Admin::where(['username' => $loginDetails->username])->first();
+
+        if ($user == true && Hash::check($loginDetails->password, $user->password)) {
+            Session::put('user', $user);
             return true;
         } else {
             return false;

@@ -289,7 +289,7 @@
           <!-- Login Form -->
           <form action="/filterLoginMethod" method="POST">
             @csrf
-            <input type="text" id="login" class="fadeIn second" name="userEmail" placeholder="login">
+            <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
             <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
             <input type="hidden" value="{{ $flag }}" name="flag">
 
