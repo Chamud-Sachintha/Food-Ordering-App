@@ -15,6 +15,12 @@ class CreateEatablesTable extends Migration
     {
         Schema::create('eatables', function (Blueprint $table) {
             $table->id();
+            $table->string('catId');
+            $table->string('eatableName');
+            $table->string('eatableImage');
+            $table->string('description');
+            $table->integer('status');
+            
             $table->timestamps();
         });
     }
