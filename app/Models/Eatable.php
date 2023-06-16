@@ -13,6 +13,7 @@ class Eatable extends Model
         'catId',
         'eatableName',
         'eatableImage',
+        'eatablePrice',
         'description',
         'status'
     ];

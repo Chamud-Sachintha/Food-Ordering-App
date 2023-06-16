@@ -107,7 +107,7 @@
             {{-- active class --}}
             <li class=""><a href="index.html"><i class="icon mdi mdi-home"></i><span>Dashboard</span></a>
             </li>
-            <li class=""><a href="/admin/category"><i class="icon mdi mdi-home"></i><span>See Menu</span></a>
+            <li class=""><a href="/client/eatables"><i class="icon mdi mdi-home"></i><span>Order Eatables</span></a>
             </li>
             <li class=""><a href="/admin/eatable"><i class="icon mdi mdi-home"></i><span>Orders</span></a>
             </li>

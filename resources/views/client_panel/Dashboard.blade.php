@@ -19,7 +19,7 @@
 
 <body>
     <div class="be-wrapper be-fixed-sidebar">
-        {{ View::make('admin_panel.Header') }}
+        {{ View::make('client_panel.Header') }}
 
         <div class="be-content">
             <div class="main-content container-fluid">
@@ -28,22 +28,22 @@
         </div>
     </div>
 
-    <script src="js/jquery.min.js" type="text/javascript"></script>
-    <script src="js/perfect-scrollbar.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/perfect-scrollbar.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/bootstrap.bundle.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('admin/js/app.js')}}" type="text/javascript"></script>
-    <script src="js/jquery.flot.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.pie.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.time.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.resize.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.orderBars.js" type="text/javascript"></script>
-    <script src="js/curvedLines.js" type="text/javascript"></script>
-    <script src="js/jquery.flot.tooltip.js" type="text/javascript"></script>
-    <script src="js/jquery.sparkline.min.js" type="text/javascript"></script>
-    <script src="js/countUp.min.js" type="text/javascript"></script>
-    <script src="js/jquery-ui.min.js" type="text/javascript"></script>
-    <script src="js/jquery.vmap.min.js" type="text/javascript"></script>
-    <script src="js/jquery.vmap.world.js" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.flot.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.flot.pie.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.flot.time.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.flot.resize.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.flot.orderBars.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/curvedLines.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.flot.tooltip.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.sparkline.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/countUp.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery-ui.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.vmap.min.js')}}" type="text/javascript"></script>
+    <script src="{{asset('admin/js/jquery.vmap.world.js')}}" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             //-initialize the javascript

@@ -18,6 +18,7 @@ class CreateEatablesTable extends Migration
             $table->string('catId');
             $table->string('eatableName');
             $table->string('eatableImage');
+            $table->integer('eatablePrice');
             $table->string('description');
             $table->integer('status');
             

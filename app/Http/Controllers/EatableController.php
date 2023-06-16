@@ -11,7 +11,7 @@ class EatableController extends Controller
     public function showManageEatablePage() {
 
         $availableCategories = Category::where(['status' => 1])->get();
-        $allEatableDetails = DB::table('eatables')->select('eatables.eatableName', 'eatables.eatableImage', 'eatables.description', 'eatables.status', 'categories.categoryName')
+        $allEatableDetails = DB::table('eatables')->select('eatables.eatableName', 'eatables.eatableImage', 'eatables.description', 'eatables.status', 'eatables.eatablePrice', 'categories.categoryName')
                                                 ->join('categories', 'eatables.catId', '=', 'categories.id')
                                                 ->where('eatables.status', '=', 1)
                                                 ->get();
@@ -25,7 +25,7 @@ class EatableController extends Controller
     public function addNewEatable(Request $eatableDetails) {
         
         $this->validate($eatableDetails, [
-            'eatableName' => 'required', 'eatableImage' => 'required | image',
+            'eatableName' => 'required', 'eatableImage' => 'required | image', 'eatablePrice' => 'required | numeric',
             'eatableDescription' => 'required'
         ]);
 
@@ -35,6 +35,7 @@ class EatableController extends Controller
             'catId' => $eatableDetails->category,
             'eatableName' => $eatableDetails->eatableName,
             'eatableImage' => $imageName,
+            'eatablePrice' => $eatableDetails->eatablePrice,
             'description' => $eatableDetails->eatableDescription,
             'status' => $eatableDetails->status
         ]);

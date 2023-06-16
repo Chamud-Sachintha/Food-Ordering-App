@@ -43,3 +43,5 @@ Route::post('/addNewCategory', [CategoryController::class, 'addNewCatgeory']);
 Route::post('/addNewEatable', [EatableController::class, 'addNewEatable']);
 
 Route::post('/registerNewCustomer', [AuthController::class, 'registerNewCustomerDetails']);
+
+Route::get('/client/eatables', [ClientController::class, 'showOrderEatablesPage']);

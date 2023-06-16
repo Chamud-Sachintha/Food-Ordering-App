@@ -70,6 +70,10 @@
                             </div>
                             <div class="row pt-3">
                               <div class="col-md-6 col-sm-12 col-lg-6">
+                                <label for="categoryName">Eatable Price</label>
+                                <input type="text" class="form-control" placeholder="Burgers" name="eatablePrice">
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-lg-6">
                                 <label for="categoryDescription">Eatable Description</label>
                                 <textarea class="form-control" name="eatableDescription"></textarea>
                               </div>
@@ -95,6 +99,7 @@
                                   <tr>
                                     <th>Eatable Name</th>
                                     <th>Eatable Image</th>
+                                    <th>Eatable Price</th>
                                     <th>Description(s)</th>
                                     <th>Category</th>
                                     <th>Status</th>
@@ -108,6 +113,7 @@
                                         <td>
                                           <img src="{{ asset('images/'.$item->eatableImage) }}" alt="" style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
                                         </td>
+                                        <td>{{ $item->eatablePrice }}</td>
                                         <td>{{ $item->description }}</td>
                                         <td>{{ $item->categoryName }}</td>
                                         <td class="center">
