@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/jquery-jvectormap-1.2.2.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/jqvmap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/bootstrap-datetimepicker.min.css')}}">
+    <script src="https://kit.fontawesome.com/958567d2cc.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{asset('admin/css/app.css')}}" type="text/css">
     <style>
         a {
@@ -69,7 +70,7 @@
         }
 
         .food-card .food-card_content .food-card_title-section {
-            height: 100px;
+            /* height: 100px; */
             overflow: hidden;
         }
 
@@ -201,14 +202,18 @@
                                             <div class="food-card_order-count">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
-                                                        <button class="btn btn-outline-secondary minus-btn" type="button" id="button-addon1"><i class="fa fa-minus"></i></button>
+                                                        <button class="btn btn-outline-secondary minus-btn" type="button" id="button-addon1" onclick="setDec()"><i class="fa fa-minus"></i></button>
                                                     </div>
-                                                    <input type="text" class="form-control input-manulator" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="0">
+                                                    <input type="text" class="form-control input-manulator" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="0" id="inc">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary add-btn" type="button" id="button-addon1"><i class="fa fa-plus"></i></button>
+                                                        <button class="btn btn-outline-secondary add-btn" type="button" id="button-addon1" onclick="setInc()"><i class="fa fa-plus"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <hr>
+                                        <div class="space-between">
+                                            <button class="btn btn-success" style="width: 100%">Add to Cart</button>
                                         </div>
                                     </div>
                                 </div>
@@ -241,6 +246,20 @@
             //-initialize the javascript
             App.init();
         });
+
+        var itemCount = 0;
+
+        function setInc() {
+            this.itemCount += 1;
+            document.getElementById("inc").value = this.itemCount;
+        }
+
+        function setDec() {
+            if (this.itemCount > 0) {
+                this.itemCount -= 1;
+                document.getElementById("inc").value = this.itemCount;
+            }
+        }
     </script>
 </body>
 
