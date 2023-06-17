@@ -32,3 +32,7 @@ Route::get('/admin/category', [CategoryController::class, 'showAddCategoryPage']
 Route::get('/admin/eatable', [EatableController::class, 'showManageEatablePage']);
 
 Route::post('/filterLoginMethod', [AuthController::class, 'filterValidateLoginMethod']);
+
+
+
+Route::post('/addNewEatable', [CategoryController::class, 'addNewEatable']);

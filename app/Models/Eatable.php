@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Eatable extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'eatableName',
+        'eatableImage',
+        'description',
+        'status'
+    ];
 }
