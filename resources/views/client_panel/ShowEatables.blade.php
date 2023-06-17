@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content>
     <meta name="author" content>
@@ -202,18 +203,18 @@
                                             <div class="food-card_order-count">
                                                 <div class="input-group mb-3">
                                                     <div class="input-group-prepend">
-                                                        <button class="btn btn-outline-secondary minus-btn" type="button" id="button-addon1" onclick="setDec()"><i class="fa fa-minus"></i></button>
+                                                        <button class="btn btn-outline-secondary minus-btn" type="button" id="button-addon1" onclick="setDec({{ $item->id }}, document.getElementById({{ $item->id }}).value)"><i class="fa fa-minus"></i></button>
                                                     </div>
-                                                    <input type="text" class="form-control input-manulator" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="0" id="inc">
+                                                    <input type="text" class="form-control input-manulator" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" value="0" id="{{ $item->id }}">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-outline-secondary add-btn" type="button" id="button-addon1" onclick="setInc()"><i class="fa fa-plus"></i></button>
+                                                        <button class="btn btn-outline-secondary add-btn" type="button" id="button-addon1" onclick="setInc({{ $item->id }}, document.getElementById({{ $item->id }}).value)"><i class="fa fa-plus"></i></button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <hr>
                                         <div class="space-between">
-                                            <button class="btn btn-success" style="width: 100%">Add to Cart</button>
+                                            <button class="btn btn-success" style="width: 100%" onclick="addToCart({{ $item->id }})">Add to Cart</button>
                                         </div>
                                     </div>
                                 </div>
@@ -247,18 +248,43 @@
             App.init();
         });
 
-        var itemCount = 0;
-
-        function setInc() {
-            this.itemCount += 1;
-            document.getElementById("inc").value = this.itemCount;
+        function setInc(id, currentValue) {
+            var num = Number(currentValue);
+            num += 1;
+            document.getElementById(id).value = num;
         }
 
-        function setDec() {
-            if (this.itemCount > 0) {
-                this.itemCount -= 1;
-                document.getElementById("inc").value = this.itemCount;
+        function setDec(id, currentValue) {
+            if (currentValue > 0) {
+                currentValue -= 1;
+                document.getElementById(id).value = currentValue;
             }
+        }
+
+        function addToCart(eatableId) {
+            var hostwithHttp = window.location.protocol + "//" + window.location.host;
+            values = {
+                'clientId': {{ Session::get('client')['id'] }},
+                'eatableId': eatableId,
+                'quantity': document.getElementById(eatableId).value
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: hostwithHttp + "/client/addItemToCart",
+                type: "post",
+                data: values ,
+                success: function (response) {
+
+                    // You will get response from your PHP page (what you echo or print)
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
         }
     </script>
 </body>

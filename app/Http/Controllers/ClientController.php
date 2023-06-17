@@ -20,12 +20,21 @@ class ClientController extends Controller
     public function showOrderEatablesPage() {
         if (Session::has('client')) {
 
-            $allEatableDetails = DB::table('eatables')->select('eatables.eatableName', 'eatables.eatableImage', 'eatables.description', 'eatables.status', 'eatables.eatablePrice', 'categories.categoryName')
+            $allEatableDetails = DB::table('eatables')->select('eatables.id', 'eatables.eatableName', 'eatables.eatableImage', 'eatables.description', 'eatables.status', 'eatables.eatablePrice', 'categories.categoryName')
                                                         ->join('categories', 'eatables.catId', '=', 'categories.id')
                                                         ->where('eatables.status', '=', 1)
                                                         ->get();
 
             return view('client_panel.ShowEatables')->with(['eatables' => $allEatableDetails]);
+        } else {
+            return redirect('/login');
+        }
+    }
+
+    public function showCartPage() {
+
+        if (Session::has('client')) {
+            return view('client_panel.CartPage');
         } else {
             return redirect('/login');
         }

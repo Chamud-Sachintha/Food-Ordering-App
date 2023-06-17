@@ -61,7 +61,7 @@
                   </div>
                 </div>
               </div>
-              <div class="footer"> <a href="#">View all notifications</a></div>
+              <div class="footer"> <a href="/client/cart">View all notifications</a></div>
             </li>
           </ul>
         </li>

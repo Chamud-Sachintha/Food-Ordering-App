@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EatableController;
@@ -45,3 +46,7 @@ Route::post('/addNewEatable', [EatableController::class, 'addNewEatable']);
 Route::post('/registerNewCustomer', [AuthController::class, 'registerNewCustomerDetails']);
 
 Route::get('/client/eatables', [ClientController::class, 'showOrderEatablesPage']);
+
+Route::get('/client/cart', [ClientController::class, 'showCartPage']);
+
+Route::post('/client/addItemToCart', [CartController::class, 'addItemToCart']);
