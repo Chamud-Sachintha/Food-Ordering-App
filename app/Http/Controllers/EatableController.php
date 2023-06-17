@@ -13,4 +13,6 @@ class EatableController extends Controller
     public function addNewEatable() {
         
     }
+    
+    //gfyjmgvcvbcfcxzvcxcx
 }
