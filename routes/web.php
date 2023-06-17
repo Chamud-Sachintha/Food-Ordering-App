@@ -47,6 +47,6 @@ Route::post('/registerNewCustomer', [AuthController::class, 'registerNewCustomer
 
 Route::get('/client/eatables', [ClientController::class, 'showOrderEatablesPage']);
 
-Route::get('/client/cart', [ClientController::class, 'showCartPage']);
+Route::get('/client/cart', [CartController::class, 'showCartPage']);
 
 Route::post('/client/addItemToCart', [CartController::class, 'addItemToCart']);

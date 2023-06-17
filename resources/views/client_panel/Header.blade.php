@@ -1,3 +1,16 @@
+<?PHP
+
+  use Illuminate\Support\Facades\DB;
+
+  $cartItems = DB::table('eatables')->select('eatables.id as eatableId', 'eatables.eatableName', 'eatables.eatableImage')
+                                                ->join('cart_items', 'eatables.id', '=', 'cart_items.eatableId')
+                                                ->join('carts', 'carts.id', '=', 'cart_items.cartId')
+                                                ->join('clients', 'carts.clientId', '=', 'clients.id')
+                                                ->where('clients.id', '=', Session::get('client')['id'])
+                                                ->get();
+
+?>
+
 <nav class="navbar navbar-expand fixed-top be-top-header">
   <div class="container-fluid">
     <div class="be-navbar-header"><a class="navbar-brand" href="index.html"></a>
@@ -31,32 +44,13 @@
                 <div class="be-scroller-notifications">
                   <div class="content">
                     <ul>
-                      <li class="notification notification-unread"><a href="#">
-                          <div class="image"><img src="images/avatar2.png" alt="Avatar"></div>
-                          <div class="notification-info">
-                            <div class="text"><span class="user-name">Jessica Caruso</span> accepted your invitation
-                              to join the team.</div><span class="date">2 min ago</span>
-                          </div>
-                        </a></li>
-                      <li class="notification"><a href="#">
-                          <div class="image"><img src="images/avatar3.png" alt="Avatar"></div>
-                          <div class="notification-info">
-                            <div class="text"><span class="user-name">Joel King</span> is now following you</div>
-                            <span class="date">2 days ago</span>
-                          </div>
-                        </a></li>
-                      <li class="notification"><a href="#">
-                          <div class="image"><img src="images/avatar4.png" alt="Avatar"></div>
-                          <div class="notification-info">
-                            <div class="text"><span class="user-name">John Doe</span> is watching your main
-                              repository</div><span class="date">2 days ago</span>
-                          </div>
-                        </a></li>
-                      <li class="notification"><a href="#">
-                          <div class="image"><img src="images/avatar5.png" alt="Avatar"></div>
+                      @foreach ($cartItems as $item)
+                        <li class="notification"><a href="#">
+                          <div class="image"><img src="{{ asset('images/'.$item->eatableImage) }}" alt="Avatar"></div>
                           <div class="notification-info"><span class="text"><span class="user-name">Emily
                                 Carter</span> is now following you</span><span class="date">5 days ago</span></div>
                         </a></li>
+                      @endforeach
                     </ul>
                   </div>
                 </div>

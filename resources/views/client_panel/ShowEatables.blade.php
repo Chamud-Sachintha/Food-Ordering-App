@@ -10,6 +10,7 @@
     <meta name="author" content>
     <link rel="shortcut icon" href="images/logo-fav.png">
     <title>Beagle</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/perfect-scrollbar.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/material-design-iconic-font.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/jquery-jvectormap-1.2.2.css')}}">
@@ -177,11 +178,13 @@
 
 <body>
     <div class="be-wrapper be-fixed-sidebar">
+
         {{ View::make('client_panel.Header') }}
 
         <div class="be-content">
             <div class="main-content container-fluid">
                 <div class="row">
+                    {{-- <button class="btn btn-space btn-success" data-toggle="modal" data-target="#mod-success" type="button">Success</button> --}}
                     @foreach ($eatables as $item)
                         <div class="col-4">
                             <div class="food-card">
@@ -278,7 +281,7 @@
                 type: "post",
                 data: values ,
                 success: function (response) {
-
+                    window.$('#mod-success').modal();
                     // You will get response from your PHP page (what you echo or print)
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -287,6 +290,27 @@
             });
         }
     </script>
+    <div class="modal fade" id="mod-success" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <div class="text-success"><span class="modal-main-icon mdi mdi-check"></span></div>
+                <h3>Awesome!</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Fusce ultrices euismod lobortis.</p>
+                <div class="mt-8">
+                  <button class="btn btn-space btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                  <button class="btn btn-space btn-success" type="button" data-dismiss="modal">Proceed</button>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer"></div>
+          </div>
+        </div>
+    </div>
 </body>
 
 </html>

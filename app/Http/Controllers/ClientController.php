@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CartItem;
 use App\Models\Eatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -26,15 +27,6 @@ class ClientController extends Controller
                                                         ->get();
 
             return view('client_panel.ShowEatables')->with(['eatables' => $allEatableDetails]);
-        } else {
-            return redirect('/login');
-        }
-    }
-
-    public function showCartPage() {
-
-        if (Session::has('client')) {
-            return view('client_panel.CartPage');
         } else {
             return redirect('/login');
         }
