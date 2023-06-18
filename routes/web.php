@@ -53,3 +53,5 @@ Route::get('/client/cart', [CartController::class, 'showCartPage']);
 Route::post('/client/addItemToCart', [CartController::class, 'addItemToCart']);
 
 Route::post('/client/placeNewOrder', [OrderController::class, 'placeNewOrder']);
+
+Route::get('/client/orders', [OrderController::class, 'showClientManageOrdersPage']);

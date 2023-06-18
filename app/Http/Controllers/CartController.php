@@ -16,11 +16,11 @@ class CartController extends Controller
             $userId = Session::get('client')['id'];
             $cartDetails = $this->verifyCart($userId);
 
-            $cartItem = CartItem::where(['cartId' => $cartDetails->id, 'eatableId' => $eatableDetails->eatableId]);
+            $cartItem = CartItem::where(['cartId' => $cartDetails->id, 'eatableId' => $eatableDetails->eatableId])->get();
 
             $createCartItem = null;
 
-            if ($cartItem) {
+            if (count($cartItem) > 0) {
                 $createCartItem = CartItem::where(['cartId' => $cartDetails->id, 'eatableId' => $eatableDetails->eatableId])
                                         ->update([
                                             'quantity' => $eatableDetails->quantity
@@ -61,7 +61,14 @@ class CartController extends Controller
                                                 ->where('clients.id', '=', Session::get('client')['id'])
                                                 ->get();
 
+            $cartId = null;
             $getClientCartId = Cart::where(['clientId' => Session::get('client')['id']])->first();
+
+            if ($getClientCartId == null) {
+                $cartId = 0;
+            } else {
+                $cartId = $getClientCartId->id;
+            }
 
             $totalCartItemPrice = 0;
 
@@ -70,7 +77,7 @@ class CartController extends Controller
             }
 
             return view('client_panel.CartPage')->with(['cartItems' => $cartItems, 'totalCartItemPrice' => $totalCartItemPrice
-                                                    , 'cartId' => $getClientCartId->id]);
+                                                    , 'cartId' => $cartId]);
         } else {
             return redirect('/login');
         }

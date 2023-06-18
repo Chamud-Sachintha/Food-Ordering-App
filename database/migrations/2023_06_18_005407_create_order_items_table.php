@@ -18,7 +18,6 @@ class CreateOrderItemsTable extends Migration
             $table->string('orderId');
             $table->string('eatableId');
             $table->integer('quantity');
-            $table->string('status');
             $table->integer('create_time');
             
             $table->timestamps();

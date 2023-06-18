@@ -11,6 +11,7 @@ class Order extends Model
 
     protected $fillable = [
         'clientId',
+        'status',
         'create_time'
     ];
 }

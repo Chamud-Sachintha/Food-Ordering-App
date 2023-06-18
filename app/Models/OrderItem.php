@@ -13,7 +13,6 @@ class OrderItem extends Model
         'orderId',
         'eatableId',
         'quantity',
-        'status',
         'create_time'
     ];
 }
