@@ -45,7 +45,7 @@
       <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1>Yummy<span>.</span></h1>
+        <h1>YummyHub<span>.</span></h1>
       </a>
 
       <nav id="navbar" class="navbar">
@@ -156,7 +156,7 @@
 
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="why-box">
-              <h3>Why Choose Yummy?</h3>
+              <h3>Why Choose YummyHub?</h3>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
                 Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
@@ -247,7 +247,7 @@
 
         <div class="section-header">
           <h2>Our Menu</h2>
-          <p>Check Our <span>Yummy Menu</span></p>
+          <p>Check Our <span>YummyHub Menu</span></p>
         </div>
 
         <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="200">
@@ -1054,7 +1054,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Yummy</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>YummyHub</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->

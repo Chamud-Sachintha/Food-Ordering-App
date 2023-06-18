@@ -8,7 +8,7 @@
     <meta name="description" content>
     <meta name="author" content>
     <link rel="shortcut icon" href="images/logo-fav.png">
-    <title>Beagle</title>
+    <title>EpicEats</title>
     <link rel="stylesheet" type="text/css" href="{{asset('admin/css/perfect-scrollbar.css')}}">
     <link rel="stylesheet" type="text/css" href="css/material-design-iconic-font.min.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-jvectormap-1.2.2.css">
