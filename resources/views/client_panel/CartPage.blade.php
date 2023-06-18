@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="description" content>
     <meta name="author" content>
     <link rel="shortcut icon" href="images/logo-fav.png">
@@ -44,36 +45,39 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($cartItems as $item)
-                                                <tr>
-                                                    <td data-th="Product">
-                                                        <div class="row">
-                                                            <div class="col-md-3 text-left">
-                                                                <img src={{ asset('images/'.$item->eatableImage) }}
-                                                                    alt=""
-                                                                    class="img-fluid d-none d-md-block rounded mb-2 shadow ">
-                                                            </div>
-                                                            <div class="col-md-9 text-left mt-sm-2">
-                                                                <h4>{{ $item->eatableName }}</h4>
-                                                                <p class="font-weight-light">{{ $item->categoryName }}</p>
-                                                            </div>
+                                            <tr>
+                                                <td data-th="Product">
+                                                    <div class="row">
+                                                        <div class="col-md-3 text-left">
+                                                            <img src={{ asset('images/'.$item->eatableImage) }}
+                                                            alt=""
+                                                            class="img-fluid d-none d-md-block rounded mb-2 shadow ">
                                                         </div>
-                                                    </td>
-                                                    <td data-th="Price">LKR. {{ $item->eatablePrice }}</td>
-                                                    <td data-th="Quantity">
-                                                        <input type="number" class="form-control form-control-lg text-center"
-                                                            value="{{ $item->quantity }}">
-                                                    </td>
-                                                    <td class="actions" data-th="">
-                                                        <div class="text-right">
-                                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                                                                <i class="fas fa-sync"></i>
-                                                            </button>
-                                                            <button class="btn btn-white border-secondary bg-white btn-md mb-2">
-                                                                <i class="fas fa-trash"></i>
-                                                            </button>
+                                                        <div class="col-md-9 text-left mt-sm-2">
+                                                            <h4>{{ $item->eatableName }}</h4>
+                                                            <p class="font-weight-light">{{ $item->categoryName }}</p>
                                                         </div>
-                                                    </td>
-                                                </tr>
+                                                    </div>
+                                                </td>
+                                                <td data-th="Price">LKR. {{ $item->eatablePrice }}</td>
+                                                <td data-th="Quantity">
+                                                    <input type="number"
+                                                        class="form-control form-control-lg text-center"
+                                                        value="{{ $item->quantity }}">
+                                                </td>
+                                                <td class="actions" data-th="">
+                                                    <div class="text-right">
+                                                        <button
+                                                            class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                            <i class="fas fa-sync"></i>
+                                                        </button>
+                                                        <button
+                                                            class="btn btn-white border-secondary bg-white btn-md mb-2">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -81,11 +85,14 @@
                                         <h4>Subtotal:</h4>
                                         <h1>LKR. {{ $totalCartItemPrice }} .00</h1>
                                     </div>
+                                    <div style="display: none">
+                                        <input type="hidden" id="cartId" value="{{ $cartId }}">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row mt-4 d-flex align-items-center">
                                 <div class="col-sm-6 order-md-2 text-right">
-                                    <a href="catalog.html" class="btn btn-primary mb-4 btn-lg pl-5 pr-5">Checkout</a>
+                                    <a href="catalog.html" class="btn btn-primary mb-4 btn-lg pl-5 pr-5" data-toggle="modal" data-target="#form-bp1">Checkout</a>
                                 </div>
                                 <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
                                     <a href="catalog.html">
@@ -121,20 +128,57 @@
             App.init();
         });
 
-        var itemCount = 0;
 
-        function setInc() {
-            this.itemCount += 1;
-            document.getElementById("inc").value = this.itemCount;
-        }
+        function placeNewOrderRequest() {
+            const cartId = document.getElementById("cartId").value;
 
-        function setDec() {
-            if (this.itemCount > 0) {
-                this.itemCount -= 1;
-                document.getElementById("inc").value = this.itemCount;
+            var hostwithHttp = window.location.protocol + "//" + window.location.host;
+            values = {
+                'cartId': cartId
             }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: hostwithHttp + "/client/placeNewOrder",
+                type: "post",
+                data: values ,
+                success: function (response) {
+                    //window.$('#mod-success').modal();
+                    // You will get response from your PHP page (what you echo or print)
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
         }
+
     </script>
+
+    <div class="modal fade colored-header colored-header-primary" id="form-bp1" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-colored">
+                    <h3 class="modal-title">Type Delivery Location Address</h3>
+                    <button class="close md-close" type="button" data-dismiss="modal" aria-hidden="true"><span
+                            class="mdi mdi-close"> </span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Deliver Location Address.</label>
+                        <input class="form-control" type="text" placeholder="No 519/B Kiribathgoda">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary md-close" type="button" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-primary md-close" type="button" data-dismiss="modal" onclick="placeNewOrderRequest()">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

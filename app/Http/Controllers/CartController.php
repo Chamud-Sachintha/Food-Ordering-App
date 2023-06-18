@@ -51,7 +51,8 @@ class CartController extends Controller
             $cartItems = DB::table('eatables')->select(
                                                     'eatables.id as eatableId', 'eatables.eatableImage', 'eatables.eatableName', 'eatables.eatablePrice',
                                                     'categories.categoryName' ,
-                                                    'cart_items.quantity'
+                                                    'cart_items.quantity',
+                                                    'carts.id as cartId'
                                                 )
                                                 ->join('categories', 'categories.id', '=', 'eatables.catId')
                                                 ->join('cart_items', 'eatables.id', '=', 'cart_items.eatableId')
@@ -60,13 +61,16 @@ class CartController extends Controller
                                                 ->where('clients.id', '=', Session::get('client')['id'])
                                                 ->get();
 
+            $getClientCartId = Cart::where(['clientId' => Session::get('client')['id']])->first();
+
             $totalCartItemPrice = 0;
 
             foreach ($cartItems as $key => $value) {
                 $totalCartItemPrice += $value->eatablePrice;
             }
 
-            return view('client_panel.CartPage')->with(['cartItems' => $cartItems, 'totalCartItemPrice' => $totalCartItemPrice]);
+            return view('client_panel.CartPage')->with(['cartItems' => $cartItems, 'totalCartItemPrice' => $totalCartItemPrice
+                                                    , 'cartId' => $getClientCartId->id]);
         } else {
             return redirect('/login');
         }

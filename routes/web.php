@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\EatableController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,3 +51,5 @@ Route::get('/client/eatables', [ClientController::class, 'showOrderEatablesPage'
 Route::get('/client/cart', [CartController::class, 'showCartPage']);
 
 Route::post('/client/addItemToCart', [CartController::class, 'addItemToCart']);
+
+Route::post('/client/placeNewOrder', [OrderController::class, 'placeNewOrder']);
