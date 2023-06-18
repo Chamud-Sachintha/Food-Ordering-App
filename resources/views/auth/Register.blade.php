@@ -287,18 +287,18 @@
           </div>
       
           <!-- Login Form -->
-          <form action="/filterLoginMethod" method="POST">
+          <form action="/registerNewCustomer" method="POST">
             @csrf
             <input type="text" id="login" class="fadeIn second" name="username" placeholder="login">
-            <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
-            <input type="hidden" value="{{ $flag }}" name="flag">
+            <input type="text" id="password" class="fadeIn third" name="password" placeholder="Type Password">
+            <input type="text" id="confPassword" class="fadeIn third" name="conf_password" placeholder="Confirm Password">
 
-            <input type="submit" class="fadeIn fourth" value="Log In">
+            <input type="submit" class="fadeIn fourth" value="Create Account">
           </form>
       
           <!-- Remind Passowrd -->
           <div id="formFooter">
-            <a class="underlineHover" href="#">Forgot Password?</a>
+            <a class="underlineHover" href="/login">Already Have an Account ? Login</a>
           </div>
       
         </div>

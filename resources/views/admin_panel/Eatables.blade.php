@@ -29,18 +29,18 @@
                       <div class="card card-border-color card-border-color-primary">
                         <div class="card-header card-header-divider">Add New Eatable<span class="card-subtitle">This is the default bootstrap form layout</span></div>
                         <div class="card-body">
-                        <form action="/addNewEatable" method="POST" enctype="multipart/form-data" onsubmit="addNewEatable()" id="eatableForm">
+                          <form action="/addNewEatable" method="POST" enctype="multipart/form-data" onsubmit="addNewEatableForm()" id="eatableForm">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 col-sm-12 col-lg-6">
-                                    <label for="categoryName">Category Name</label>
-                                    <input type="text" class="form-control" placeholder="Burgers" name="categoryName">
+                                    <label for="categoryName">Eatable Name</label>
+                                    <input type="text" class="form-control" placeholder="Burgers" name="eatableName">
                                 </div>
                                 <div class="col-md-6 col-lg-6 col-sm-12">
                                     <label>Custom Button File Input</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                        <span class="input-group-text">
+                                            <span class="input-group-text">
                                                 Upload
                                             </span>
                                         </div>
@@ -52,16 +52,30 @@
                                 </div>
                             </div>
                             <div class="row">
-                            <div class="col-md-6 col-sm-12 col-lg-6">
-                                <label>Basic Select</label>
+                              <div class="col-md-6 col-sm-12 col-lg-6">
+                                <label>Eatable Status</label>
                                 <select class="form-control" name="status">
                                   <option value="1">Active</option>
                                   <option value="0">Inactive</option>
                                 </select>
                               </div>
                               <div class="col-md-6 col-sm-12 col-lg-6">
-                                  <label for="description">Category Description</label>
-                                  <textarea class="form-control" name="description"></textarea>
+                                <label>Choose Category</label>
+                                <select class="form-control" name="category">
+                                  @foreach ($categories as $item)
+                                    <option value="{{ $item->id }}">{{ $item->categoryName }}</option>
+                                  @endforeach
+                                </select>
+                              </div>
+                            </div>
+                            <div class="row pt-3">
+                              <div class="col-md-6 col-sm-12 col-lg-6">
+                                <label for="categoryName">Eatable Price</label>
+                                <input type="text" class="form-control" placeholder="Burgers" name="eatablePrice">
+                              </div>
+                              <div class="col-md-6 col-sm-12 col-lg-6">
+                                <label for="categoryDescription">Eatable Description</label>
+                                <textarea class="form-control" name="eatableDescription"></textarea>
                               </div>
                             </div>
                             <div class="row pt-3">
@@ -84,22 +98,25 @@
                               <table class="table table-striped table-hover table-fw-widget" id="table4">
                                 <thead>
                                   <tr>
-                                  <th>Category Name</th>
-                                    <th>Category Image</th>
+                                    <th>Eatable Name</th>
+                                    <th>Eatable Image</th>
+                                    <th>Eatable Price</th>
                                     <th>Description(s)</th>
-                                    <th>Category Status</th>
-                                    <th>Actions</th>
+                                    <th>Category</th>
+                                    <th>Status</th>
                                   </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($eatables as $item)
+                                  @foreach ($eatables as $item)
                                     @if ($loop->index %2 == 0)
                                       <tr class="even">
                                         <td>{{ $item->eatableName }}</td>
                                         <td>
                                           <img src="{{ asset('images/'.$item->eatableImage) }}" alt="" style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
                                         </td>
+                                        <td>{{ $item->eatablePrice }}</td>
                                         <td>{{ $item->description }}</td>
+                                        <td>{{ $item->categoryName }}</td>
                                         <td class="center">
                                           @if ($item->status == 1)
                                             Active
@@ -124,7 +141,9 @@
                                         <td>
                                           <img src="{{ asset('images/'.$item->eatableImage) }}" alt="" style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
                                         </td>
+                                        <td>{{ $item->eatablePrice }}</td>
                                         <td>{{ $item->description }}</td>
+                                        <td>{{ $item->categoryName }}</td>
                                         <td class="center">
                                           @if ($item->status == 1)
                                             Active
@@ -173,7 +192,7 @@
             App.dataTables();
         });
 
-        function addNewCategory(e) {
+        function addNewEatableForm(e) {
           e.preventDefault();
         }
     </script>

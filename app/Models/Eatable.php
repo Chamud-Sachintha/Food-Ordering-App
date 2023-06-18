@@ -10,8 +10,10 @@ class Eatable extends Model
     use HasFactory;
 
     protected $fillable = [
+        'catId',
         'eatableName',
         'eatableImage',
+        'eatablePrice',
         'description',
         'status'
     ];
