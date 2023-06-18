@@ -32,28 +32,29 @@
                                 <table class="table table-striped table-hover table-fw-widget" id="table4">
                                     <thead>
                                         <tr>
-                                            <th>Category Name</th>
-                                            <th>Category Image</th>
-                                            <th>Description(s)</th>
-                                            <th>Category Status</th>
+                                            <th>Order No</th>
+                                            <th>Item Count</th>
+                                            <th>Total Amount</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $item)
+                                        @foreach ($allOrders as $item)
                                             @if ($loop->index %2 == 0)
                                                 <tr class="even">
-                                                    <td>{{ $item->categoryName }}</td>
+                                                    <td>{{ $item['orderId'] }}</td>
                                                     <td>
-                                                        <img src="{{ asset('images/'.$item->categoryImage) }}" alt=""
-                                                            style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
+                                                       {{ $item['itemCount'] }}
                                                     </td>
-                                                    <td>{{ $item->description }}</td>
+                                                    <td>{{ $item['totalAmt'] }}</td>
                                                     <td class="center">
-                                                        @if ($item->status == 1)
-                                                        Active
+                                                        @if ($item['status'] == 0)
+                                                            Pending
+                                                        @elseif ($item['status'] == 1)
+                                                            Preparing
                                                         @else
-                                                        Inactive
+                                                            Delivering
                                                         @endif
                                                     </td>
                                                     <td class="center">
@@ -71,17 +72,18 @@
                                                 </tr>
                                             @else
                                                 <tr class="odd">
-                                                    <td>{{ $item->categoryName }}</td>
+                                                    <td>{{ $item['orderId'] }}</td>
                                                     <td>
-                                                        <img src="{{ asset('images/'.$item->categoryImage) }}" alt=""
-                                                            style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
+                                                    {{ $item['itemCount'] }}
                                                     </td>
-                                                    <td>{{ $item->description }}</td>
+                                                    <td>{{ $item['totalAmt'] }}</td>
                                                     <td class="center">
-                                                        @if ($item->status == 1)
-                                                            Active
+                                                        @if ($item['status'] == 0)
+                                                            Pending
+                                                        @elseif ($item['status'] == 1)
+                                                            Preparing
                                                         @else
-                                                            Inactive
+                                                            Delivering
                                                         @endif
                                                     </td>
                                                     <td class="center">

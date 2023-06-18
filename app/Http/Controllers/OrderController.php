@@ -61,11 +61,35 @@ class OrderController extends Controller
 
     public function showClientManageOrdersPage() {
 
+        $allOrderList = array();
+
         if (Session::has('client')) {
 
-            //$allActiveOrders = DB::table('order_items')->select('order_items')
+            $allActiveOrders = Order::where(['clientId' => Session::get('client')['id']])->get();
 
-            return view('client_panel.ManageOrders');
+            foreach ($allActiveOrders as $key => $value) {
+                $itemCount = OrderItem::where(['orderId' => $value['id']])->count('*');
+                $eatableList = DB::table('eatables')->select('eatables.eatablePrice')
+                                                    ->join('order_items', 'order_items.eatableId', '=', 'eatables.id')
+                                                    ->where('order_items.orderId', '=', $value['id'])
+                                                    ->get();
+
+                $totalAmt = 0;
+
+                foreach ($eatableList as $itemKey => $eatable) {
+                    $totalAmt += $eatable->eatablePrice;
+                }   
+
+                $data['orderId'] = $value['id'];
+                $data['clientId'] = $value['clientId'];
+                $data['status'] = $value['status'];
+                $data['itemCount'] = $itemCount;
+                $data['totalAmt'] = $totalAmt;
+
+                $allOrderList[$key] = $data;
+            }
+
+            return view('client_panel.ManageOrders')->with(['allOrders' => $allOrderList]);
         } else {
             return redirect('/login');
         }
