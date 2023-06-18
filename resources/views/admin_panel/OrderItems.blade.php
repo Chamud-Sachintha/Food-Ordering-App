@@ -32,70 +32,33 @@
                                 <table class="table table-striped table-hover table-fw-widget" id="table4">
                                     <thead>
                                         <tr>
-                                            <th>Order No</th>
-                                            <th>Item Count</th>
-                                            <th>Total Amount</th>
-                                            <th>Status</th>
-                                            <th>Actions</th>
+                                            <th>Eatable Name</th>
+                                            <th>Featured Image</th>
+                                            <th>Eatable Price</th>
+                                            <th>Quantity</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($allOrders as $item)
+                                        @foreach ($orderItems as $item)
                                             @if ($loop->index %2 == 0)
                                                 <tr class="even">
-                                                    <td>{{ $item['orderId'] }}</td>
+                                                    <td>{{ $item->eatableName }}</td>
                                                     <td>
-                                                       {{ $item['itemCount'] }}
+                                                        <img src="{{ asset('images/'.$item->eatableImage) }}" alt=""
+                                                            style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
                                                     </td>
-                                                    <td>{{ $item['totalAmt'] }}</td>
-                                                    <td class="center">
-                                                        @if ($item['status'] == 0)
-                                                            Pending
-                                                        @elseif ($item['status'] == 1)
-                                                            Preparing
-                                                        @else
-                                                            Delivering
-                                                        @endif
-                                                    </td>
-                                                    <td class="center">
-                                                        <div class="row">
-                                                            <div class="col-md-3 col-sm-12 col-lg-3">
-                                                                <a href="/client/orderItems/{{ $item['orderId'] }}" class="btn btn-rounded btn-space btn-success">View</a>
-                                                            </div>
-                                                            <div class="col-md-9 col-sm-12 col-lg-9">
-                                                                <button
-                                                                    class="btn btn-rounded btn-space btn-danger">Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                    <td>{{ $item->eatablePrice }}</td>
+                                                    <td>{{ $item->quantity }}</td>
                                                 </tr>
                                             @else
                                                 <tr class="odd">
-                                                    <td>{{ $item['orderId'] }}</td>
+                                                    <td>{{ $item->eatableName }}</td>
                                                     <td>
-                                                    {{ $item['itemCount'] }}
+                                                        <img src="{{ asset('images/'.$item->eatableImage) }}" alt=""
+                                                            style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
                                                     </td>
-                                                    <td>{{ $item['totalAmt'] }}</td>
-                                                    <td class="center">
-                                                        @if ($item['status'] == 0)
-                                                            Pending
-                                                        @elseif ($item['status'] == 1)
-                                                            Preparing
-                                                        @else
-                                                            Delivering
-                                                        @endif
-                                                    </td>
-                                                    <td class="center">
-                                                        <div class="row">
-                                                            <div class="col-md-3 col-sm-12 col-lg-3">
-                                                                <a href="/client/orderItems/{{ $item['orderId'] }}" class="btn btn-rounded btn-space btn-success">View</a>
-                                                            </div>
-                                                            <div class="col-md-9 col-sm-12 col-lg-9">
-                                                                <button
-                                                                    class="btn btn-rounded btn-space btn-danger">Delete</button>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                                                    <td>{{ $item->eatablePrice }}</td>
+                                                    <td>{{ $item->quantity }}</td>
                                                 </tr>
                                             @endif
                                         @endforeach

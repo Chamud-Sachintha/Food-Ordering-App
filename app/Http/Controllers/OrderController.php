@@ -95,6 +95,73 @@ class OrderController extends Controller
         }
     }
 
+    public function showOrderItemsPage($orderId) {
+
+        if (Session::has('client')) {
+            
+            $orderItems = DB::table('eatables')->select(
+                                                    'eatables.id as eatableId', 'eatables.eatableName', 'eatables.eatableImage', 'eatables.eatablePrice',
+                                                    'order_items.quantity')
+                                                ->join('order_items', 'order_items.eatableId', '=', 'eatables.id')
+                                                ->where('order_items.orderId', '=', $orderId)
+                                                ->get();
+
+            return view('client_panel.OrderItems')->with(['orderItems' => $orderItems]);
+        } else {
+            return redirect('/login');
+        }
+    }
+
+    public function showOrderRequestPageAdmin() {
+
+        $allOrderList = array();
+
+        if (Session::has('user')) {
+            $allActiveOrders = Order::where(['status' => 0])->get();
+
+            foreach ($allActiveOrders as $key => $value) {
+                $itemCount = OrderItem::where(['orderId' => $value['id']])->count('*');
+                $eatableList = DB::table('eatables')->select('eatables.eatablePrice')
+                                                    ->join('order_items', 'order_items.eatableId', '=', 'eatables.id')
+                                                    ->where('order_items.orderId', '=', $value['id'])
+                                                    ->get();
+
+                $totalAmt = 0;
+
+                foreach ($eatableList as $itemKey => $eatable) {
+                    $totalAmt += $eatable->eatablePrice;
+                }   
+
+                $data['orderId'] = $value['id'];
+                $data['clientId'] = $value['clientId'];
+                $data['status'] = $value['status'];
+                $data['itemCount'] = $itemCount;
+                $data['totalAmt'] = $totalAmt;
+
+                $allOrderList[$key] = $data;
+            }
+
+            return view('admin_panel.OrderRequest')->with(['allOrders' => $allOrderList]);
+        } else {
+            return redirect('/admin/login');
+        }
+    }
+
+    public function showAdminOrderItemsPage($orderId) {
+
+        if (Session::has('user')) {
+            $orderItems = DB::table('eatables')->select(
+                                                    'eatables.id as eatableId', 'eatables.eatableName', 'eatables.eatableImage', 'eatables.eatablePrice',
+                                                    'order_items.quantity')
+                                                ->join('order_items', 'order_items.eatableId', '=', 'eatables.id')
+                                                ->where('order_items.orderId', '=', $orderId)
+                                                ->get();
+            return view('admin_panel.OrderItems')->with(['orderItems' => $orderItems]);
+        } else {
+            return redirect('/login');
+        }
+    }
+
     private function verifyPendingOrderExists($clientId) {
 
         $order = null;

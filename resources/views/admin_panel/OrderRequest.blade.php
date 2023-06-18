@@ -60,7 +60,7 @@
                                                     <td class="center">
                                                         <div class="row">
                                                             <div class="col-md-3 col-sm-12 col-lg-3">
-                                                                <a href="/client/orderItems/{{ $item['orderId'] }}" class="btn btn-rounded btn-space btn-success">View</a>
+                                                                <a href="/admin/orderItems/{{ $item['orderId'] }}" class="btn btn-rounded btn-space btn-success">View</a>
                                                             </div>
                                                             <div class="col-md-9 col-sm-12 col-lg-9">
                                                                 <button

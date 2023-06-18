@@ -136,11 +136,13 @@
                                       </tr>
                                     @else
                                       <tr class="odd">
-                                        <td>{{ $item->categoryName }}</td>
+                                        <td>{{ $item->eatableName }}</td>
                                         <td>
-                                          <img src="{{ asset('images/'.$item->categoryImage) }}" alt="" style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
+                                          <img src="{{ asset('images/'.$item->eatableImage) }}" alt="" style="width: 200px; height: 100px; background-attachment: fixed; background-position: center">
                                         </td>
+                                        <td>{{ $item->eatablePrice }}</td>
                                         <td>{{ $item->description }}</td>
+                                        <td>{{ $item->categoryName }}</td>
                                         <td class="center">
                                           @if ($item->status == 1)
                                             Active

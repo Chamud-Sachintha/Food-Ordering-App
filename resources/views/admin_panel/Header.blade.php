@@ -111,7 +111,7 @@
             </li>
             <li class=""><a href="/admin/eatable"><i class="icon mdi mdi-home"></i><span>Manage Eatables</span></a>
             </li>
-            <li class=""><a href="/admin/category"><i class="icon mdi mdi-home"></i><span>Manage Orders</span></a>
+            <li class=""><a href="/admin/orders"><i class="icon mdi mdi-home"></i><span>Manage Orders</span></a>
             </li>
             <li class=""><a href="/admin/category"><i class="icon mdi mdi-home"></i><span>Settings</span></a>
             </li>

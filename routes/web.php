@@ -55,3 +55,9 @@ Route::post('/client/addItemToCart', [CartController::class, 'addItemToCart']);
 Route::post('/client/placeNewOrder', [OrderController::class, 'placeNewOrder']);
 
 Route::get('/client/orders', [OrderController::class, 'showClientManageOrdersPage']);
+
+Route::get('/client/orderItems/{orderId}', [OrderController::class, 'showOrderItemsPage']);
+
+Route::get('/admin/orders', [OrderController::class, 'showOrderRequestPageAdmin']);
+
+Route::get('/admin/orderItems/{orderId}', [OrderController::class, 'showAdminOrderItemsPage']);
