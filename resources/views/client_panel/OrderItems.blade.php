@@ -64,6 +64,10 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="float-right text-right">
+                                    <h4>Subtotal:</h4>
+                                    <h1>LKR. {{ $totalCartItemPrice }} .00</h1>
+                                </div>
                             </div>
                         </div>
                     </div>

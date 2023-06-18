@@ -73,7 +73,7 @@ class CartController extends Controller
             $totalCartItemPrice = 0;
 
             foreach ($cartItems as $key => $value) {
-                $totalCartItemPrice += $value->eatablePrice;
+                $totalCartItemPrice += ($value->eatablePrice * $value->quantity);
             }
 
             return view('client_panel.CartPage')->with(['cartItems' => $cartItems, 'totalCartItemPrice' => $totalCartItemPrice

@@ -61,3 +61,5 @@ Route::get('/client/orderItems/{orderId}', [OrderController::class, 'showOrderIt
 Route::get('/admin/orders', [OrderController::class, 'showOrderRequestPageAdmin']);
 
 Route::get('/admin/orderItems/{orderId}', [OrderController::class, 'showAdminOrderItemsPage']);
+
+Route::post('/admin/changeOrderStatus', [OrderController::class, 'changeOrderStatus']);

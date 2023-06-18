@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta name="description" content>
     <meta name="author" content>
     <link rel="shortcut icon" href="images/logo-fav.png">
@@ -19,7 +20,7 @@
 
 <body>
     <div class="be-wrapper be-fixed-sidebar">
-        {{ View::make('client_panel.Header') }}
+        {{ View::make('admin_panel.Header') }}
 
         <div class="be-content">
             <div class="main-content container-fluid">
@@ -64,6 +65,20 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+                                <div class="row pt-3">
+                                    <div class="col-12">
+                                        <label for="orderStatus">Order Status :</label>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-12">
+                                        <select class="form-control" name="status" id="orderStatus">
+                                            <option value="1">Preparing</option>
+                                            <option value="2">Delivering</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-lg-6 col-sm-12">
+                                        <button class="btn btn-primary btn-lg" onclick="onChangeOrderStatus()">Change Status</button>    
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -94,6 +109,33 @@
             App.init();
             App.dashboard();
         });
+
+        function onChangeOrderStatus() {
+            var hostwithHttp = window.location.protocol + "//" + window.location.host;
+            const orderStatus = document.getElementById("orderStatus").value;
+
+            values = {
+                'orderId': {{ $orderId }},   
+                'orderStatus': orderStatus
+            }
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: hostwithHttp + "/admin/changeOrderStatus",
+                type: "post",
+                data: values ,
+                success: function (response) {
+                    window.$('#mod-success').modal();
+                    // You will get response from your PHP page (what you echo or print)
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        }
     </script>
 </body>
 

@@ -94,7 +94,7 @@
                                 <div class="col-sm-6 order-md-2 text-right">
                                     <a href="catalog.html" class="btn btn-primary mb-4 btn-lg pl-5 pr-5" data-toggle="modal" data-target="#form-bp1">Checkout</a>
                                 </div>
-                                <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left">
+                                <div class="col-sm-6 mb-3 mb-m-1 order-md-1 text-md-left"> 
                                     <a href="catalog.html">
                                         <i class="fas fa-arrow-left mr-2"></i> Continue Shopping</a>
                                 </div>
@@ -131,10 +131,12 @@
 
         function placeNewOrderRequest() {
             const cartId = document.getElementById("cartId").value;
+            const deliveryLocation = document.getElementById("deliveryLocation").value;
 
             var hostwithHttp = window.location.protocol + "//" + window.location.host;
             values = {
-                'cartId': cartId
+                'cartId': cartId,
+                'deliveryLocation': deliveryLocation
             }
             $.ajaxSetup({
                 headers: {
@@ -146,7 +148,7 @@
                 type: "post",
                 data: values ,
                 success: function (response) {
-                    //window.$('#mod-success').modal();
+                    window.$('#mod-success').modal();
                     // You will get response from your PHP page (what you echo or print)
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -168,7 +170,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Deliver Location Address.</label>
-                        <input class="form-control" type="text" placeholder="No 519/B Kiribathgoda">
+                        <input class="form-control" type="text" placeholder="No 519/B Kiribathgoda" id="deliveryLocation">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -176,6 +178,28 @@
                     <button class="btn btn-primary md-close" type="button" data-dismiss="modal" onclick="placeNewOrderRequest()">Proceed</button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mod-success" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
+            </div>
+            <div class="modal-body">
+              <div class="text-center">
+                <div class="text-success"><span class="modal-main-icon mdi mdi-check"></span></div>
+                <h3>Awesome!</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Fusce ultrices euismod lobortis.</p>
+                <div class="mt-8">
+                  <button class="btn btn-space btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                  <button class="btn btn-space btn-success" type="button" data-dismiss="modal">Proceed</button>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer"></div>
+          </div>
         </div>
     </div>
 

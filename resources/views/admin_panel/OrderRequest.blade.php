@@ -19,7 +19,7 @@
 
 <body>
     <div class="be-wrapper be-fixed-sidebar">
-        {{ View::make('client_panel.Header') }}
+        {{ View::make('admin_panel.Header') }}
 
         <div class="be-content">
             <div class="main-content container-fluid">

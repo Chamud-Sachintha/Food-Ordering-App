@@ -25,7 +25,8 @@ class OrderController extends Controller
         if ($verifyPendingOrder == null) {
             $createOrderId = Order::create([
                 'clientId' => Session::get('client')['id'],
-                'status' => '0', // 0 - Pending 1 - Preparing 2 - Deliver
+                'status' => '0', // 0 - Pending 1 - Preparing 2 - Deliver,
+                'deliveryLocation' => $orderDetails->deliveryLocation,
                 'create_time' => strtotime($this->getDayTime())
             ]);
         } else {
@@ -106,7 +107,13 @@ class OrderController extends Controller
                                                 ->where('order_items.orderId', '=', $orderId)
                                                 ->get();
 
-            return view('client_panel.OrderItems')->with(['orderItems' => $orderItems]);
+            $totalItemPrice = 0;
+
+            foreach ($orderItems as $key => $value) {
+                $totalItemPrice += ($value->eatablePrice * $value->quantity);
+            }
+
+            return view('client_panel.OrderItems')->with(['orderItems' => $orderItems, 'totalCartItemPrice' => $totalItemPrice]);
         } else {
             return redirect('/login');
         }
@@ -156,9 +163,24 @@ class OrderController extends Controller
                                                 ->join('order_items', 'order_items.eatableId', '=', 'eatables.id')
                                                 ->where('order_items.orderId', '=', $orderId)
                                                 ->get();
-            return view('admin_panel.OrderItems')->with(['orderItems' => $orderItems]);
+            return view('admin_panel.OrderItems')->with(['orderItems' => $orderItems, 'orderId' => $orderId]);
         } else {
             return redirect('/login');
+        }
+    }
+
+    public function changeOrderStatus(Request $orderDetails) {
+
+        try {
+            $updateOrder = Order::where(['id' => $orderDetails->orderId])->update(['status' => $orderDetails->orderStatus]);
+
+            if ($updateOrder) {
+                return response('Operation Complete', 201);
+            } else {
+                return response('Operation Failed.', 500);
+            }
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
         }
     }
 

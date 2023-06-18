@@ -39,7 +39,7 @@
             aria-expanded="false"><span class="icon mdi mdi-notifications"></span><span class="indicator"></span></a>
           <ul class="dropdown-menu be-notifications">
             <li>
-              <div class="title">Notifications<span class="badge badge-pill">3</span></div>
+              <div class="title">Your Cart<span class="badge badge-pill">3</span></div>
               <div class="list">
                 <div class="be-scroller-notifications">
                   <div class="content">
@@ -47,15 +47,17 @@
                       @foreach ($cartItems as $item)
                         <li class="notification"><a href="#">
                           <div class="image"><img src="{{ asset('images/'.$item->eatableImage) }}" alt="Avatar"></div>
-                          <div class="notification-info"><span class="text"><span class="user-name">Emily
-                                Carter</span> is now following you</span><span class="date">5 days ago</span></div>
+                          <div class="notification-info"><span class="text"><span class="user-name">
+                            {{ $item->eatableName }}
+                            </span> is now Added to Cart</span>
+                          </div>
                         </a></li>
                       @endforeach
                     </ul>
                   </div>
                 </div>
               </div>
-              <div class="footer"> <a href="/client/cart">View all notifications</a></div>
+              <div class="footer"> <a href="/client/cart">View Your Cart</a></div>
             </li>
           </ul>
         </li>
