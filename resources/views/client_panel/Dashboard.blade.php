@@ -23,7 +23,52 @@
 
         <div class="be-content">
             <div class="main-content container-fluid">
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-6">
+                        <div class="widget widget-tile">
+                            <div class="chart sparkline" id="spark1"></div>
+                            <div class="data-info">
+                              <div class="desc">My Orders</div>
+                              <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="{{ $ordersCount }}">0</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-md-4 col-lg-4 col-sm-6">
+                        <div class="widget widget-tile">
+                            <div class="chart sparkline" id="spark1"></div>
+                            <div class="data-info">
+                              <div class="desc">All Eatables</div>
+                              <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="{{ $eatableCount }}">0</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4 col-sm-6">
+                        <div class="widget widget-tile">
+                            <div class="chart sparkline" id="spark1"></div>
+                            <div class="data-info">
+                              <div class="desc">Categories</div>
+                              <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="{{ $categoryCount }}">0</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-6">
+                        <div class="widget widget-tile">
+                            <div class="chart sparkline" id="spark1"></div>
+                            <div class="data-info">
+                              <div class="desc">Cart Items</div>
+                              <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="{{ $cartItemsCount }}">0</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

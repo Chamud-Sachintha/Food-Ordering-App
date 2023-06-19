@@ -114,7 +114,7 @@
                       <td class="center">
                         <div class="row">
                           <div class="col-md-3 col-sm-12 col-lg-3">
-                            <button class="btn btn-rounded btn-space btn-success">Success</button>
+                            <button class="btn btn-rounded btn-space btn-success edit" data-toggle="modal" data-target="#form-bp1">Update</button>
                           </div>
                           <div class="col-md-9 col-sm-12 col-lg-9">
                             <button class="btn btn-rounded btn-space btn-danger">Delete</button>
@@ -140,7 +140,7 @@
                       <td class="center">
                         <div class="row">
                           <div class="col-md-3 col-sm-12 col-lg-3">
-                            <button class="btn btn-rounded btn-space btn-success">Success</button>
+                            <button class="btn btn-rounded btn-space btn-success edit" data-toggle="modal" data-target="#form-bp1">Update</button>
                           </div>
                           <div class="col-md-9 col-sm-12 col-lg-9">
                             <button class="btn btn-rounded btn-space btn-danger">Delete</button>
@@ -178,10 +178,47 @@
       App.dataTables();
     });
 
+    var table = $('#table4').DataTable();
+
+    table.on('click', '.edit', function () {
+        $tr = $(this).closest('tr');
+
+        if($($tr).hasClass('child')) {
+            $tr = $tr.prev('.parent');
+        }
+
+        var data = table.row($tr).data();
+        console.log(data);
+        $('#vehicleId').val(data[0]);
+
+        $('#exampleModal').modal('show');
+      });
+
     function addNewCategory(e) {
       e.preventDefault();
     }
   </script>
+  <div class="modal fade colored-header colored-header-primary" id="form-bp1" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-colored">
+                <h3 class="modal-title">Type Delivery Location Address</h3>
+                <button class="close md-close" type="button" data-dismiss="modal" aria-hidden="true"><span
+                        class="mdi mdi-close"> </span></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Deliver Location Address.</label>
+                    <input class="form-control" type="text" placeholder="No 519/B Kiribathgoda" id="deliveryLocation">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary md-close" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary md-close" type="button" data-dismiss="modal" onclick="placeNewOrderRequest()">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
