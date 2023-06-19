@@ -175,7 +175,7 @@
     $(document).ready(function () {
       //-initialize the javascript
       App.init();
-      App.dataTables();
+      //App.dataTables();
     });
 
     var table = $('#table4').DataTable();
