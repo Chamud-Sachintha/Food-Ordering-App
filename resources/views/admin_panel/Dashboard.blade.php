@@ -23,7 +23,40 @@
 
         <div class="be-content">
             <div class="main-content container-fluid">
+                <div class="row">
+                    <div class="col-md-4 col-lg-4 col-sm-6">
+                        <div class="widget widget-tile">
+                            <div class="chart sparkline" id="spark1"></div>
+                            <div class="data-info">
+                              <div class="desc">New Users</div>
+                              <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="{{ $clientCount }}">0</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-md-4 col-lg-4 col-sm-6">
+                        <div class="widget widget-tile">
+                            <div class="chart sparkline" id="spark1"></div>
+                            <div class="data-info">
+                              <div class="desc">All Categories</div>
+                              <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="{{ $categoriesCount }}">0</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 col-lg-4 col-sm-6">
+                        <div class="widget widget-tile">
+                            <div class="chart sparkline" id="spark1"></div>
+                            <div class="data-info">
+                              <div class="desc">All Eatables</div>
+                              <div class="value"><span class="indicator indicator-equal mdi mdi-chevron-right"></span><span class="number" data-toggle="counter" data-end="{{ $eatableCount }}">0</span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
